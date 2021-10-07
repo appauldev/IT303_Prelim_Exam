@@ -5,7 +5,6 @@ package sales;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -24,8 +23,8 @@ public class Sales {
 		
 		// user instructions
 		System.out.println("Enter 2-3 numeric inputs. Separate your inputs using the Enter key.\n"
-						 + "Please note that the operations Division and Module will ignore your third argument\n"
-						 + "as these operations will only use your first and second inputs, i.e., input1 / input2 or input1 % input2.");
+						 + "Please note that the operations Division and Modulo will ignore your third argument\n"
+						 + "since these operations will only use your first and second inputs, i.e., input1 / input2 or input1 % input2.");
 		// get the user input. Limit the input to three values
 		for (int i = 0; i < 3; i++) {
 			// take an input while the user is not giving a valid numeric input
@@ -46,7 +45,7 @@ public class Sales {
 		}
 //		sc.close();
 		
-		System.out.println("Input values are " + Arrays.toString(inputVals));
+		System.out.println("Input values are " + Arrays.toString(inputVals) + "\n");
 		return inputVals;
 	}
 	
@@ -112,7 +111,7 @@ public class Sales {
 
 
 	public static void main(String[] args) {
-		
+		// get user input and initialize the program's variable
 		double[] userInput = getInput();
 		Scanner sc = new Scanner(System.in);
 		int choice = 0;
@@ -129,8 +128,8 @@ public class Sales {
 		
 		// loop while the user is not entering a valid option
 		while(isChoosing) {
-//			Scanner sc = new Scanner(System.in);
 			try {
+				// Display the options
 				System.out.println("Choose the operation to perform:");
 				System.out.println("[1] Addition\n"
 								 + "[2] Subtraction\n"
@@ -141,20 +140,23 @@ public class Sales {
 								 + "[7] Increment"
 								 + "\n\n[0] Exit Program.\n");
 				System.out.print("Input the [number] of your choice: ");
-				choice = sc.nextInt();
+				choice = sc.nextInt(); // get the user input
 				
+				// user chooses to exit the program
 				if(choice == 0) {
 					System.out.println("Exiting program. Goodbye!");
 					sc.close();
 					return;
 				}
+				// user input is out of the valid range of input
 				if(choice < 1 || choice > 7) {
 					throw new Exception("Error: The input is out of the input range. Please choose again.");
 				}
 				else {
+					// the user has a valid input, exit the while loop
 					isChoosing = false;
 				}
-				
+			// catch other exceptions	
 			} catch (Exception e){
 				e.printStackTrace();
 				sc.nextLine();
@@ -162,6 +164,7 @@ public class Sales {
 		}
 		// close the scanner object
 		sc.close();
+		
 		// Print the chosen operation
 		System.out.printf("The operation chosen is [%d] %s for inputs %s.\n\n",
 				choice, opsMapping.get(choice), Arrays.toString(userInput));
@@ -176,7 +179,7 @@ public class Sales {
 			System.out.println("The running product of the user input is " + Multiply(userInput));
 		}
 		if(choice == 4) {
-			System.out.printf("The quotient of the %.3f over %.3f is %.3f user input is ", userInput[0], userInput[1], Divide(userInput));
+			System.out.printf("The quotient of the %.3f over %.3f is %.3f", userInput[0], userInput[1], Divide(userInput));
 		}
 		if(choice == 5) {
 			System.out.printf("The result of %.3f modulo %.3f from the user input is %.3f", userInput[0], userInput[1], Modulo(userInput));
